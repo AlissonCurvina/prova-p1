@@ -1,14 +1,14 @@
+import LembreteEntrada from './LembreteEntrada'
 
 const App = () => {
   return(
     <div className="container">
-      <div className="row">
+      <div className="row mt-4">
         <div className="col">
-          <h1>Hello, Lembretes</h1>
+          <LembreteEntrada/>
         </div>
       </div>
     </div>
-    
   )
 }
 
