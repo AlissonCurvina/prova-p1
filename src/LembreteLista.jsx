@@ -1,12 +1,14 @@
-const LembreteLista = (props) => {
+import React from "react"
 
-    return (
-    <div>
-        <div>Preparar aula de programação</div>
-        <div>Fazer feira</div>
-        <div>Preparar marmitas</div>
-    </div>
-    )
+
+export default class LembreteLista extends React.Component {
+    render() {
+        return (
+        <div>
+            {this.props.lembretes.map(lembrete => (
+                <div>{lembrete}</div>
+            ))}
+        </div>
+        )
+    }
 }
-
-export default LembreteLista
