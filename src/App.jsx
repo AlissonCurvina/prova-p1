@@ -30,9 +30,8 @@ class App extends React.Component {
 	}
 
 	obterLembrete = () => {
-		const novoLembrete = this.obterValorInput()
+		const novoLembrete = [this.obterValorInput(), 0]
 		// this.setState({novoLembrete: this.obterValorInput()})
-
 
 		this.setState(stateAtual => ({
 			lembretes: [...stateAtual.lembretes, novoLembrete]
@@ -43,12 +42,43 @@ class App extends React.Component {
 
 	removerLembrete = (lembrete) => {
 		const listaLembretesAtual = [...this.state.lembretes]
-		const indiceElementoARemover = listaLembretesAtual.indexOf(lembrete)
+
+		const indiceElementoARemover = listaLembretesAtual.findIndex(elemento => {
+			
+			const nome = elemento[0];
+			
+			return nome === lembrete;
+		})
+
 		listaLembretesAtual.splice(indiceElementoARemover, 1)
 
 		this.setState({
 			lembretes: [...listaLembretesAtual]
 		})
+	}
+
+	alterarStatusFavoritoLembrete = (lembrete) => {
+		const listaLembretesAtual = [...this.state.lembretes]
+
+		const indiceElementoAAtualizar = listaLembretesAtual.findIndex(elemento => {
+			
+			const nome = elemento[0];
+			
+			return nome === lembrete;
+		})
+
+		const statusFavoritoAtual = listaLembretesAtual[indiceElementoAAtualizar][1]
+
+		if(statusFavoritoAtual) {
+			listaLembretesAtual[indiceElementoAAtualizar][1] = 0
+		} else {
+			listaLembretesAtual[indiceElementoAAtualizar][1] = 1
+		}
+
+		this.setState({
+			lembretes: [...listaLembretesAtual]
+		})
+
 	}
 
 	render() {
@@ -58,7 +88,9 @@ class App extends React.Component {
 					<div className="col">
 						<LembreteLista 
 							lembretes={this.state.lembretes}
-							removerLembrete={this.removerLembrete}/>
+							removerLembrete={this.removerLembrete}
+							alterarStatusFavoritoLembrete={this.alterarStatusFavoritoLembrete}
+							/>
 					</div>
 				</div>
 				<div className="row mt-4">
