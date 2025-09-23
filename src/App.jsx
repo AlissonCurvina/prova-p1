@@ -41,12 +41,24 @@ class App extends React.Component {
 		this.limparValorInput()
 	}
 
+	removerLembrete = (lembrete) => {
+		const listaLembretesAtual = [...this.state.lembretes]
+		const indiceElementoARemover = listaLembretesAtual.indexOf(lembrete)
+		listaLembretesAtual.splice(indiceElementoARemover, 1)
+
+		this.setState({
+			lembretes: [...listaLembretesAtual]
+		})
+	}
+
 	render() {
 		return (
 			<div className="container">
 				<div className="row mt-4">
 					<div className="col">
-						<LembreteLista lembretes={this.state.lembretes}/>
+						<LembreteLista 
+							lembretes={this.state.lembretes}
+							removerLembrete={this.removerLembrete}/>
 					</div>
 				</div>
 				<div className="row mt-4">

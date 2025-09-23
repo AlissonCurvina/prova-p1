@@ -9,6 +9,7 @@ export default class LembreteEntrada extends React.Component {
                 onChange={this.props.atualizarValorInput}
                 value={this.props.valorInput} type="text"/>
             <button 
+                className="d-flex"
                 onClick={this.props.obterLembrete}>
                 Adicionar
             </button>
