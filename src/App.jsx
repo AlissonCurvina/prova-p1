@@ -13,7 +13,9 @@ class App extends React.Component {
 		this.state = {
 			lembretes: this.lembretes,
 			valorInput: "",
-			novoLembrete: null
+			novoLembrete: null,
+			estaFiltrado: 0
+
 		}
 	}
 
@@ -81,15 +83,30 @@ class App extends React.Component {
 
 	}
 
+	filtrar = (e) => {
+		if(this.state.estaFiltrado) {
+			this.setState({
+				estaFiltrado: 0
+			})
+			
+		} else {
+			this.setState({
+				estaFiltrado: 1
+			})
+		}
+	}
+
 	render() {
 		return (
 			<div className="container">
 				<div className="row mt-4">
 					<div className="col">
 						<LembreteLista 
+							estaFiltrado={this.state.estaFiltrado}
 							lembretes={this.state.lembretes}
 							removerLembrete={this.removerLembrete}
 							alterarStatusFavoritoLembrete={this.alterarStatusFavoritoLembrete}
+							filtrar={this.filtrar}
 							/>
 					</div>
 				</div>
