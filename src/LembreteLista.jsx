@@ -2,14 +2,12 @@ import React from "react"
 
 export default class LembreteLista extends React.Component {
     render() {
-        let lembretesParaExibir;
+        const lembretesParaExibir = this.props.estaFiltrado ?
+            this.props.lembretes.filter((lembrete) => {
+                return lembrete[1] == 1
+            })
+            : this.props.lembretes
 
-        if (this.props.estaFiltrado) {
-            lembretesParaExibir = this.props.lembretes.filter(lembrete => lembrete[1] == 1);
-        } else {
-            lembretesParaExibir = this.props.lembretes;
-        }
-    
     return (
         <div>
             <button onClick={() => this.props.filtrar()}>

@@ -4,8 +4,6 @@ import LembreteLista from './LembreteLista'
 
 class App extends React.Component {
 
-	
-
 	constructor(props) {
 		super(props)
 		this.lembretes = []
@@ -15,7 +13,6 @@ class App extends React.Component {
 			valorInput: "",
 			novoLembrete: null,
 			estaFiltrado: 0
-
 		}
 	}
 
@@ -33,54 +30,47 @@ class App extends React.Component {
 
 	obterLembrete = () => {
 		const novoLembrete = [this.obterValorInput(), 0]
-		// this.setState({novoLembrete: this.obterValorInput()})
+		const stateListaLembretesAtual = this.state.lembretes
+
+		stateListaLembretesAtual.push(novoLembrete)
+
 
 		this.setState(stateAtual => ({
-			lembretes: [...stateAtual.lembretes, novoLembrete]
+			lembretes: stateListaLembretesAtual
 		}))
 
 		this.limparValorInput()
 	}
 
 	removerLembrete = (lembrete) => {
-		const listaLembretesAtual = [...this.state.lembretes]
+		
+		const stateListaLembretesAtual = this.state.lembretes
 
-		const indiceElementoARemover = listaLembretesAtual.findIndex(elemento => {
+		const listaLembretesNova = stateListaLembretesAtual.filter(elemento => {
 			
-			const nome = elemento[0];
+			const nome = elemento[0]
 			
-			return nome === lembrete;
+			return nome	!= lembrete
 		})
 
-		listaLembretesAtual.splice(indiceElementoARemover, 1)
 
 		this.setState({
-			lembretes: [...listaLembretesAtual]
+			lembretes: listaLembretesNova
 		})
 	}
 
 	alterarStatusFavoritoLembrete = (lembrete) => {
-		const listaLembretesAtual = [...this.state.lembretes]
-
-		const indiceElementoAAtualizar = listaLembretesAtual.findIndex(elemento => {
-			
-			const nome = elemento[0];
-			
-			return nome === lembrete;
-		})
-
-		const statusFavoritoAtual = listaLembretesAtual[indiceElementoAAtualizar][1]
-
-		if(statusFavoritoAtual) {
-			listaLembretesAtual[indiceElementoAAtualizar][1] = 0
+		const listaLembretesNova = this.state.lembretes.map(lembreteAtual => {
+		if (lembreteAtual[0] == lembrete) {
+			return [lembreteAtual[0], lembreteAtual[1] ? 0 : 1]
 		} else {
-			listaLembretesAtual[indiceElementoAAtualizar][1] = 1
+			return lembreteAtual
 		}
+	})
 
 		this.setState({
-			lembretes: [...listaLembretesAtual]
+			lembretes: listaLembretesNova
 		})
-
 	}
 
 	filtrar = (e) => {
