@@ -89,7 +89,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<div className="container">
-				<div className="row mt-4">
+				<div className="row mt-3">
 					<div className="col">
 						<LembreteLista 
 							estaFiltrado={this.state.estaFiltrado}
@@ -100,7 +100,7 @@ class App extends React.Component {
 							/>
 					</div>
 				</div>
-				<div className="row mt-4">
+				<div className="row">
 					<div className="col">
 						<LembreteEntrada 
 							atualizarValorInput={this.atualizarValorInput}

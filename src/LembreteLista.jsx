@@ -10,24 +10,26 @@ export default class LembreteLista extends React.Component {
 
     return (
         <div>
-            <button onClick={() => this.props.filtrar()}>
+            <button className="mb-3 btn btn-primary" onClick={() => this.props.filtrar()}>
                 <i className="fa-solid fa-filter"></i>
                 <div>{`${this.props.estaFiltrado ? "Limpar Filtro" : "Filtrar favoritos"}`}</div>
             </button>
             <div>
                 {lembretesParaExibir.map(lembrete => (
-                    <div key={lembrete[0]}>
+                    <div className="mb-3" key={lembrete[0]}>
                         <div className="card">
-                            <div className="card-body d-flex justify-content-center">
-                                <div>
-                                    <p className="text-center">{lembrete[0]}</p>
+                            <div className="card-body d-flex align-items-center justify-content-evenly">
+                                <h5 className="w-100 text-center">
+                                    {lembrete[0]}
+                                </h5>
+                                <div className="d-flex">
+                                    <button className={`btn btn-${lembrete[1] ? "warning" : ""}`} onClick={() => this.props.alterarStatusFavoritoLembrete(lembrete[0])}>
+                                        <i className={`fa-${lembrete[1] ? "solid" : "regular"} fa-star`}></i>   
+                                    </button>
+                                    <button className="btn btn-danger ms-3" onClick={() => this.props.removerLembrete(lembrete[0])}>
+                                        <i className="fa-trash fa-solid"></i>
+                                    </button>
                                 </div>
-                                <button onClick={() => this.props.removerLembrete(lembrete[0])}>
-                                    <i className="fa-trash fa-solid"></i>
-                                </button>
-                                <button onClick={() => this.props.alterarStatusFavoritoLembrete(lembrete[0])}>
-                                    <i className={`fa-${lembrete[1] ? "solid" : "regular"} fa-star`}></i>
-                                </button>
                             </div>
                         </div>
                     </div>
